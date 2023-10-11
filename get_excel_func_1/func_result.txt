@@ -1,0 +1,1 @@
+=if(or(isnumber(search("连",a2,1)),isnumber(search("伴侣",a2,1)),isnumber(search("测速",a2,1)),isnumber(search("网速",a2,1)),isnumber(search("网络",a2,1)),isnumber(search("精灵",a2,1)),isnumber(search("流量",a2,1)),isnumber(search("管家",a2,1)),isnumber(search("大师",a2,1))),1,0)
