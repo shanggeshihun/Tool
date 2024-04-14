@@ -9,22 +9,22 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.header import Header
 
-from_addr='1569873132@qq.com'   #邮件发送账号
-qqCode='qnhjjixyilbchgjg'   #授权码（这个要填自己获取到的）
-to_addrs='2511633760@qq.com'   #接收邮件账号
-smtp_server='smtp.qq.com'#固定写死
-smtp_port=465#固定端口
+from_addr = '1569873132@qq.com'  # 邮件发送账号
+qqCode = 'zioyuypxubqvhcbb'  # 授权码（这个要填自己获取到的）
+to_addrs = '2511633760@qq.com'  # 接收邮件账号
+smtp_server = 'smtp.qq.com'  # 固定写死
+smtp_port = 465  # 固定端口
 
-#配置服务器
-stmp=smtplib.SMTP_SSL(smtp_server,smtp_port)
-stmp.login(from_addr,qqCode)
+# 配置服务器
+stmp = smtplib.SMTP_SSL(smtp_server, smtp_port)
+stmp.login(from_addr, qqCode)
 
 # 创建一个带附件的实例
 message = MIMEMultipart()
-message['From'] = Header("我是发件人", 'utf-8')   #发件人
-message['To'] = Header("我是收件人", 'utf-8')   #收件人
+message['From'] = "aaaa 1569873132@qq.com"  # 发件人
+message['To'] = Header("bbbb", 'utf-8')  # 收件人
 mail_title = '主题：这是带附件的邮件'
-message['Subject'] = Header(mail_title, 'utf-8')  #邮件标题
+message['Subject'] = Header(mail_title, 'utf-8')  # 邮件标题
 
 # 邮件正文内容
 message.attach(MIMEText('这是邮件的正文', 'plain', 'utf-8'))
@@ -48,7 +48,7 @@ message.attach(MIMEText('这是邮件的正文', 'plain', 'utf-8'))
 # message.attach(att3)
 
 # 构造超链接4（附件为HTML格式的网页）
-typelink_message='''
+typelink_message = '''
 <table border=1>
 <tr><th>水果</th><th>蔬菜</th></tr>
 <tr><td>苹果</td><td>西红柿</td></tr>
@@ -57,11 +57,11 @@ typelink_message='''
 <p><a href="https://www.baidu.com">进入异世界百度搜索</a></p>
 <img src="...">
 '''
-att4=MIMEText(typelink_message, 'html', 'utf-8')
+att4 = MIMEText(typelink_message, 'html', 'utf-8')
 message.attach(att4)
 
-smtpObj = smtplib.SMTP_SSL(smtp_server,smtp_port)  # 注意：如果遇到发送失败的情况（提示远程主机拒接连接），这里要使用SMTP_SSL方法
+smtpObj = smtplib.SMTP_SSL(smtp_server, smtp_port)  # 注意：如果遇到发送失败的情况（提示远程主机拒接连接），这里要使用SMTP_SSL方法
 smtpObj.login(from_addr, qqCode)
-smtpObj.sendmail(from_addr, to_addrs, message.as_string())
+# smtpObj.sendmail(from_addr, to_addrs, message.as_string())
 print("邮件发送成功！！！")
 smtpObj.quit()
