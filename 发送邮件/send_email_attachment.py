@@ -9,6 +9,16 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.header import Header
 
+import base64
+
+def From_RFC_encode(no_ascii_str):
+    # 定义中文昵称和邮箱地址
+    no_ascii_str = "你好呀我是"
+    email_address = "example@qq.com"
+    # 对中文昵称进行base64编码
+    encoded = base64.b64encode(no_ascii_str.encode('utf-8')).decode('utf-8')
+    return '=?UTF-8?B?{}?='.format(encoded)
+
 from_addr = '1569873132@qq.com'  # 邮件发送账号
 qqCode = 'zioyuypxubqvhcbb'  # 授权码（这个要填自己获取到的）
 to_addrs = '2511633760@qq.com'  # 接收邮件账号
@@ -21,8 +31,8 @@ stmp.login(from_addr, qqCode)
 
 # 创建一个带附件的实例
 message = MIMEMultipart()
-message['From'] = "aaaa 1569873132@qq.com"  # 发件人
-message['To'] = Header("bbbb", 'utf-8')  # 收件人
+message['From'] = "{0} <{1}>".format(From_RFC_encode('发件人'), from_addr)  # 发件人 构建符合RFC规范的"From"字段
+message['To'] = "{0} <{1}>".format(From_RFC_encode('收件人'), to_addrs)  # 发件人 构建符合RFC规范的"From"字段
 mail_title = '主题：这是带附件的邮件'
 message['Subject'] = Header(mail_title, 'utf-8')  # 邮件标题
 
